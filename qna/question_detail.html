@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ question.title }}{% endblock %}
+{% block content %}
+    <h2>{{ question.title }}</h2>
+    <p>{{ question.content }}</p>
+    <p>Posted by {{ question.author }} on {{ question.created_at }}</p>
+    <h3>Answers</h3>
+    {% for answer in question.answers.all %}
+        <p>{{ answer.content }}</p>
+        <p>Posted by {{ answer.author }} on {{ answer.created_at }}</p>
+    {% empty %}
+        <p>No answers yet.</p>
+    {% endfor %}
+    {% if user.is_authenticated %}
+        <h3>Add an Answer</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit Answer</button>
+        </form>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Questions{% endblock %}
+{% block content %}
+    <h2>Questions</h2>
+    {% if user.is_authenticated %}
+        <a href="{% url 'question_create' %}">Ask a Question</a>
+    {% endif %}
+    {% for question in questions %}
+        <div>
+            <h3><a href="{% url 'question_detail' question.pk %}">{{ question.title }}</a></h3>
+            <p>Posted by {{ question.author }} on {{ question.created_at }}</p>
+        </div>
+    {% empty %}
+        <p>No questions yet.</p>
+    {% endfor %}
+{% endblock %}
