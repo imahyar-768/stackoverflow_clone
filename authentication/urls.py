@@ -1,10 +1,12 @@
- from django.urls import path
+from django.urls import path
 from . import views
 
 urlpatterns = [
     path('register/', views.register_user, name='register'),
     path('login/', views.login_user, name='login'),
-]ls import Token
+]
+
+from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer
